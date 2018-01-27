@@ -11,30 +11,24 @@ DigitalOut led2(LED2);
 DigitalOut led3(LED3);
 DigitalOut led4(LED4);
 
+int message[50];
+int lastMessage = 0;
+
 void numericRead()
 {
-	while(true)
+	while (true) 
 	{
-		if(in1 == 1)
-		{
-			led2 = 1;
-		}
-		else
-		{
-			led2 = 0;
-		}
+		led3 = in1;
+		led4 = in2;
+		message[lastMessage] = in2 << 1 && in1;
+		lastMessage++;
+		Thread::wait(100);
 	}
 }
 
 void analogRead() 
 {
-	while (true) 
-	{
-		led3 = 1;
-		Thread::wait(50);
-		led3 = 0;
-		Thread::wait(50);
-	}
+	
 }
 
 void collection()
@@ -47,19 +41,41 @@ void collection()
 
 int main()
 {
+	memset(message, '\0', 50);
+	
 	osThreadId mainId = osThreadGetId();
 	osThreadSetPriority(mainId, osPriorityHigh);
 	
 	Thread numReadThread;
 	numReadThread.start(numericRead);
-	numReadThread.set_priority(osPriorityHigh);
+	numReadThread.set_priority(osPriorityAboveNormal);
 	
 	osThreadSetPriority(mainId, osPriorityNormal);
 	while(true)
 	{
-		led4 = 1;
-		wait(1);
-		led4 = 0;
-		wait(1);
+		if(message[0] != '\0')
+		{
+			if(message[0] == 0b00)
+			{
+				led1 = 0;
+				led2 = 0;
+			}
+			else if (message[0] == 0b01)
+			{
+				led1 = 1;
+				led2 = 0;
+			}
+			else if(message[0] == 0b10)
+			{
+				led1 = 0;
+				led2 = 1;
+			}
+			else if(message[0] == 0b11)
+			{
+				led1 = 1;
+				led2 = 1;
+			}
+			lastMessage--;
+		}
 	}
 }
