@@ -11,8 +11,8 @@ DigitalOut led2(LED2);
 DigitalOut led3(LED3);
 DigitalOut led4(LED4);
 
-int message[50];
-int lastMessage = 0;
+Queue<unsigned int,50> fifo;
+Mutex fifoMutex;
 
 void numericRead()
 {
@@ -20,8 +20,11 @@ void numericRead()
 	{
 		led3 = in1;
 		led4 = in2;
-		message[lastMessage] = in2 << 1 && in1;
-		lastMessage++;
+		unsigned int message = (unsigned int)in2 << 1 || (unsigned int)in1 << 0;		// in1 == bit 0/ in2 == bit 1
+		time_t ms = time(NULL);
+		fifoMutex.lock();
+		fifo.put(&message,ms);
+		fifoMutex.unlock();
 		Thread::wait(100);
 	}
 }
@@ -31,18 +34,8 @@ void analogRead()
 	
 }
 
-void collection()
-{
-	while(true)
-	{
-		wait(1);
-	}
-}
-
 int main()
-{
-	memset(message, '\0', 50);
-	
+{	
 	osThreadId mainId = osThreadGetId();
 	osThreadSetPriority(mainId, osPriorityHigh);
 	
@@ -53,29 +46,14 @@ int main()
 	osThreadSetPriority(mainId, osPriorityNormal);
 	while(true)
 	{
-		if(message[0] != '\0')
+		fifoMutex.lock();
+		osEvent fifoEvent = fifo.get();
+		if(fifoEvent.status == osEventMessage)
 		{
-			if(message[0] == 0b00)
-			{
-				led1 = 0;
-				led2 = 0;
-			}
-			else if (message[0] == 0b01)
-			{
-				led1 = 1;
-				led2 = 0;
-			}
-			else if(message[0] == 0b10)
-			{
-				led1 = 0;
-				led2 = 1;
-			}
-			else if(message[0] == 0b11)
-			{
-				led1 = 1;
-				led2 = 1;
-			}
-			lastMessage--;
+			unsigned int value = (unsigned int)fifoEvent.value.p;
+			led1 = 1;
 		}
+		fifoMutex.unlock();
+		Thread::wait(100);
 	}
 }

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\BUILD\mbed_RTOS_test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\BUILD\mbed_RTOS_test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sat Jan 27 17:42:19 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sat Jan 27 17:49:56 2018
 <BR><P>
 <H3>Maximum Stack Usage =        688 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -2027,7 +2027,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isrSemaphoreRelease
 </UL>
 
-<P><STRONG><a name="[fc]"></a>$Super$$main</STRONG> (Thumb, 246 bytes, Stack size 104 bytes, .\build\main.o(i.main))
+<P><STRONG><a name="[fc]"></a>$Super$$main</STRONG> (Thumb, 262 bytes, Stack size 104 bytes, .\build\main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 672 + Unknown Stack Size
 <LI>Call Chain = $Super$$main &rArr; rtos::Thread::start(mbed::Callback&lang;void()&rang;) &rArr; rtos::Semaphore::release() &rArr; osSemaphoreRelease &rArr; isrSemaphoreRelease &rArr; isr_sem_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
