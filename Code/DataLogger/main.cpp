@@ -20,7 +20,10 @@ void numericRead()
 	{
 		led3 = in1;
 		led4 = in2;
-		unsigned int message = (unsigned int)in2 << 1 || (unsigned int)in1 << 0;		// in1 == bit 0/ in2 == bit 1
+		unsigned int bit0 = in1 == 1 ? 1 : 0;
+		unsigned int bit1 = in2 == 1 ? 1 : 0;
+		bit1 = bit1 << 1;
+		unsigned int message = bit0 | bit1;
 		time_t ms = time(NULL);
 		fifoMutex.lock();
 		fifo.put(&message,ms);
@@ -50,8 +53,19 @@ int main()
 		osEvent fifoEvent = fifo.get();
 		if(fifoEvent.status == osEventMessage)
 		{
-			unsigned int value = (unsigned int)fifoEvent.value.p;
-			led1 = 1;
+			unsigned int* prtValue = (unsigned int*)fifoEvent.value.v;
+			int bin[2] = {0,0};
+			int decValue = *prtValue;
+			int step = 10;
+			while(decValue !=0)
+      {
+					int remainder = decValue%2;
+					decValue /= 2;
+					bin[step%10] = remainder*step;
+					step /= 10;
+			}
+			led1 = bin[0];
+			led2 = bin[1];
 		}
 		fifoMutex.unlock();
 		Thread::wait(100);

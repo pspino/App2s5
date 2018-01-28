@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\BUILD\MainFrame.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\BUILD\MainFrame.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sun Jan 28 14:22:56 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sun Jan 28 15:17:15 2018
 <BR><P>
-<H3>Maximum Stack Usage =        728 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        736 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 pre_main &rArr; main &rArr; $Super$$main &rArr; osMessageGet &rArr; isrMessageGet &rArr; isr_mbx_receive &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 <P>
@@ -1450,7 +1450,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[106]"></a>main</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/retarget.o(i.$Sub$$main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 720 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 728 + Unknown Stack Size
 <LI>Call Chain = main &rArr; $Super$$main &rArr; osMessageGet &rArr; isrMessageGet &rArr; isr_mbx_receive &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_main
@@ -1462,7 +1462,7 @@ Global Symbols
 <P><STRONG><a name="[36]"></a>SystemInit</STRONG> (Thumb, 150 bytes, Stack size 0 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/system_LPC17xx.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_LPC17xx.o(.text)
 </UL>
-<P><STRONG><a name="[46]"></a>numericRead()</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, .\build\main.o(i._Z11numericReadv))
+<P><STRONG><a name="[46]"></a>numericRead()</STRONG> (Thumb, 124 bytes, Stack size 8 bytes, .\build\main.o(i._Z11numericReadv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 552 + Unknown Stack Size
 <LI>Call Chain = numericRead() &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
@@ -2083,8 +2083,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isrSemaphoreRelease
 </UL>
 
-<P><STRONG><a name="[108]"></a>$Super$$main</STRONG> (Thumb, 200 bytes, Stack size 120 bytes, .\build\main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 712 + Unknown Stack Size
+<P><STRONG><a name="[108]"></a>$Super$$main</STRONG> (Thumb, 270 bytes, Stack size 128 bytes, .\build\main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 720 + Unknown Stack Size
 <LI>Call Chain = $Super$$main &rArr; osMessageGet &rArr; isrMessageGet &rArr; isr_mbx_receive &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadSetPriority
@@ -2477,7 +2477,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[6d]"></a>pre_main</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, .\build\rtx_conf_cm.o(i.pre_main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 728 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 736 + Unknown Stack Size
 <LI>Call Chain = pre_main &rArr; main &rArr; $Super$$main &rArr; osMessageGet &rArr; isrMessageGet &rArr; isr_mbx_receive &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
