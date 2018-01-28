@@ -11,8 +11,13 @@ DigitalOut led2(LED2);
 DigitalOut led3(LED3);
 DigitalOut led4(LED4);
 
-Queue<unsigned int,50> fifo;
+Queue<Event,50> fifo;
 Mutex fifoMutex;
+
+typedef struct {
+   uint16_t    value;
+   time_t    timeStamp;
+} Event;
 
 void numericRead()
 {
@@ -26,7 +31,8 @@ void numericRead()
 		unsigned int message = bit0 | bit1;
 		time_t ms = time(NULL);
 		fifoMutex.lock();
-		fifo.put(&message,ms);
+		Event numEvent = {message,ms};
+		fifo.put(numEvent,ms);
 		fifoMutex.unlock();
 		Thread::wait(100);
 	}
@@ -34,7 +40,17 @@ void numericRead()
 
 void analogRead() 
 {
-	
+	while (true) 
+	{
+		button = an1;
+		potentiometre = an2;
+		time_t ms = time(NULL);
+		fifoMutex.lock();
+		Event analogEvent = {button.read_u16(),ms};
+		fifo.put(numEvent,ms);
+		fifoMutex.unlock();
+		Thread::wait(100);
+	}
 }
 
 int main()
@@ -45,6 +61,10 @@ int main()
 	Thread numReadThread;
 	numReadThread.start(numericRead);
 	numReadThread.set_priority(osPriorityAboveNormal);
+	
+	Thread analogReadThread;
+	analogReadThread.start(analogRead);
+	analogReadThread.set_priority(osPriorityNormal);
 	
 	osThreadSetPriority(mainId, osPriorityNormal);
 	while(true)
