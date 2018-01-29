@@ -11,13 +11,15 @@ DigitalOut led2(LED2);
 DigitalOut led3(LED3);
 DigitalOut led4(LED4);
 
-Queue<Event,50> fifo;
-Mutex fifoMutex;
-
 typedef struct {
    uint16_t    value;
    time_t    timeStamp;
-} Event;
+}Event;
+
+Queue<Event,50> fifo;
+Mutex fifoMutex;
+
+
 
 void numericRead()
 {
@@ -27,12 +29,12 @@ void numericRead()
 		led4 = in2;
 		unsigned int bit0 = in1 == 1 ? 1 : 0;
 		unsigned int bit1 = in2 == 1 ? 1 : 0;
-		bit1 = bit1 << 1;			//This shift is to place the bool value to the respective bit.
+		bit1 = bit1 << 1;
 		unsigned int message = bit0 | bit1;
 		time_t ms = time(NULL);
 		fifoMutex.lock();
 		Event numEvent = {message,ms};
-		fifo.put(numEvent,ms);
+		fifo.put(&numEvent,ms);
 		fifoMutex.unlock();
 		Thread::wait(100);
 	}
@@ -42,12 +44,10 @@ void analogRead()
 {
 	while (true) 
 	{
-		button = an1;
-		potentiometre = an2;
 		time_t ms = time(NULL);
 		fifoMutex.lock();
-		Event analogEvent = {button.read_u16(),ms};
-		fifo.put(numEvent,ms);
+		Event analogEvent = {an1.read_u16(),ms};
+		fifo.put(&analogEvent,ms);
 		fifoMutex.unlock();
 		Thread::wait(100);
 	}
@@ -73,10 +73,9 @@ int main()
 		osEvent fifoEvent = fifo.get();
 		if(fifoEvent.status == osEventMessage)
 		{
-			//Getting the first value on the queue (FIFO)
 			unsigned int* prtValue = (unsigned int*)fifoEvent.value.v;
 			int bin[2] = {0,0};
-			int decValue = *prtValue;	//Obligatory operation since the returned value of the queue.get is a unsigned int*, better to store it once and then reused it locally.
+			int decValue = *prtValue;
 			int step = 10;
 			while(decValue !=0)
       {
