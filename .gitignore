@@ -1,1 +1,6 @@
 NotesProcedural/
+*.toc
+*.synctex.*
+*.aux
+*.dvi
+*.log

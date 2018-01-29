@@ -22,7 +22,7 @@ void numericRead()
 		led4 = in2;
 		unsigned int bit0 = in1 == 1 ? 1 : 0;
 		unsigned int bit1 = in2 == 1 ? 1 : 0;
-		bit1 = bit1 << 1;
+		bit1 = bit1 << 1;			//This shift is to place the bool value to the respective bit.
 		unsigned int message = bit0 | bit1;
 		time_t ms = time(NULL);
 		fifoMutex.lock();
@@ -53,9 +53,10 @@ int main()
 		osEvent fifoEvent = fifo.get();
 		if(fifoEvent.status == osEventMessage)
 		{
+			//Getting the first value on the queue (FIFO)
 			unsigned int* prtValue = (unsigned int*)fifoEvent.value.v;
 			int bin[2] = {0,0};
-			int decValue = *prtValue;
+			int decValue = *prtValue;	//Obligatory operation since the returned value of the queue.get is a unsigned int*, better to store it once and then reused it locally.
 			int step = 10;
 			while(decValue !=0)
       {
