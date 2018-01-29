@@ -42,14 +42,25 @@ void numericRead()
 
 void analogRead() 
 {
+	uint16_t currentMean =0;
 	while (true) 
 	{
 		time_t ms = time(NULL);
 		fifoMutex.lock();
-		Event analogEvent = {an1.read_u16(),ms};
+		uint16_t analogMean =0;
+		for(uint8_t index =0;index<5;index++)
+		{
+			analogMean +=an1.read_u16();
+			Thread::wait(50);
+		}
+		analogMean/=5;
+		if(analogMean > (currentMean*1.125) || analogMean < (currentMean*0.875))
+		{
+			currentMean =analogMean;
+		}
+		Event analogEvent = {currentMean,ms};
 		fifo.put(&analogEvent,ms);
 		fifoMutex.unlock();
-		Thread::wait(100);
 	}
 }
 
