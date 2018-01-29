@@ -47,24 +47,39 @@ void numericRead()
 
 void analogRead() 
 {
-	uint16_t currentMean = 0;
+	uint16_t an1CurrentMean =0;
+	uint16_t an2CurrentMean =0;
 	while (true) 
 	{
-		time_t ms = time(NULL);
 		fifoMutex.lock();
-		uint16_t analogMean = 0;
-		for(uint8_t index = 0;index<5;index++)
+		time_t ms = time(NULL);
+		uint16_t an1Mean =0;
+		uint16_t an2Mean =0;
+		uint8_t analogPins =0;
+		for(uint8_t index =0;index<5;index++)
 		{
-			analogMean +=an1.read_u16();
+			an1Mean +=an1.read_u16();
+			an2Mean +=an2.read_u16();
 			Thread::wait(50);
 		}
-		analogMean/=5;
-		if(analogMean > (currentMean*1.125) || analogMean < (currentMean*0.875))
+		an1Mean/=5;
+		an2Mean/=5;
+		if(an1Mean > (an1CurrentMean*1.125) || an1Mean < (an1CurrentMean*0.875))
 		{
-			currentMean =analogMean;
+			analogPins = 0b0100;
+			an1CurrentMean =an1Mean;
 		}
-		Event analogEvent = {currentMean,ms};
-		fifo.put(&analogEvent,ms);
+		if(an2Mean > (an2CurrentMean*1.125) || an2Mean < (an2CurrentMean*0.875))
+		{
+			analogPins |= 0b1000;
+			an2CurrentMean =an2Mean;			
+		}
+		if(analogPins!=0)
+		{
+			uint32_t analogValue = an1CurrentMean | an2CurrentMean << 16;
+			Event analogEvent = {analogPins,analogValue,ms};
+			fifo.put(&analogEvent,ms);
+		}
 		fifoMutex.unlock();
 	}
 }
