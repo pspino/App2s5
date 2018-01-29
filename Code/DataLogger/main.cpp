@@ -15,11 +15,13 @@ typedef struct
 {
 	uint8_t				pins; 				//7:4 reserved -> 3:0 pins.
 	uint32_t    	value;
-  time_t    		timeStamp;
+  struct tm    	timeStamp;
 }Event;
 
+Queue<struct tm,1> timeQueue;
 Queue<Event,50> fifo;
 Mutex fifoMutex;
+Mutex timeMutex;
 
 void NumericP1()
 {
@@ -72,10 +74,14 @@ void NumericP1()
 		}
 		if(newValue)
 		{
-			time_t ms = time(NULL);
+			timeMutex.lock();
+			osEvent timeEvent = fifo.get(5);
+			timeMutex.unlock();
+			struct tm* ms = (struct tm*)timeEvent.value.p;
+			//printf("Current local time and date: %s", asctime(ms));
 			newValue = false;
 			uint8_t bit = bit0 | (bit1 << 1);
-			Event event = {bit, 0x0000, ms};
+			Event event = {bit, 0x0000, *ms};
 			fifo.put(&event);
 		}
 		fifoMutex.unlock();
@@ -89,7 +95,6 @@ void analogRead()
 	while (true) 
 	{
 		fifoMutex.lock();
-		time_t ms = time(NULL);
 		uint16_t an1Mean =0;
 		uint16_t an2Mean =0;
 		uint8_t analogPins =0;
@@ -113,11 +118,30 @@ void analogRead()
 		}
 		if(analogPins!=0)
 		{
+			timeMutex.lock();
+			osEvent timeEvent = fifo.get(5);
+			timeMutex.unlock();
+			struct tm* ms = (struct tm*)timeEvent.value.p;
+		//	printf("Current local time and date: %s", asctime(ms));
 			uint32_t analogValue = an1CurrentMean | an2CurrentMean << 16;
-			Event analogEvent = {analogPins,analogValue,ms};
-			fifo.put(&analogEvent,ms);
+			Event analogEvent = {analogPins,analogValue,*ms};
+			fifo.put(&analogEvent);
 		}
 		fifoMutex.unlock();
+	}
+}
+
+void RTCRead()
+{
+	while (true) 
+	{	
+		//	Thread::signal_wait(0);
+		  time_t rawtime;
+			struct tm *info;
+			time( &rawtime );
+			info = localtime( &rawtime );
+			timeQueue.put(info);
+			Thread::wait(50);
 	}
 }
 
@@ -133,6 +157,10 @@ int main()
 	Thread analogReadThread;
 	analogReadThread.start(analogRead);
 	analogReadThread.set_priority(osPriorityNormal);
+	
+	Thread RTCThread;
+	RTCThread.start(RTCRead);
+	RTCThread.set_priority(osPriorityLow);
 	
 	osThreadSetPriority(mainId, osPriorityNormal);
 	while(true)
