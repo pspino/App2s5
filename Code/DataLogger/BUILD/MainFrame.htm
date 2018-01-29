@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\BUILD\MainFrame.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\BUILD\MainFrame.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Mon Jan 29 11:38:33 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Mon Jan 29 15:28:35 2018
 <BR><P>
 <H3>Maximum Stack Usage =        832 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -18,18 +18,18 @@ Mutually Recursive functions
  <LI><a href="#[10]">UsageFault_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[10]">UsageFault_Handler</a><BR>
  <LI><a href="#[12]">DebugMon_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[12]">DebugMon_Handler</a><BR>
  <LI><a href="#[2b]">ADC_IRQHandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[2b]">ADC_IRQHandler</a><BR>
- <LI><a href="#[117]">mbed_assert_internal</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[152]">mbed_die</a><BR>
- <LI><a href="#[14c]">core_util_critical_section_enter</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[117]">mbed_assert_internal</a><BR>
+ <LI><a href="#[116]">mbed_assert_internal</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[152]">mbed_die</a><BR>
+ <LI><a href="#[14c]">core_util_critical_section_enter</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[116]">mbed_assert_internal</a><BR>
  <LI><a href="#[157]">gpio_init_out_ex</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[156]">gpio_mode</a><BR>
- <LI><a href="#[155]">pin_function</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[117]">mbed_assert_internal</a><BR>
- <LI><a href="#[153]">gpio_dir</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[117]">mbed_assert_internal</a><BR>
+ <LI><a href="#[155]">pin_function</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[116]">mbed_assert_internal</a><BR>
+ <LI><a href="#[153]">gpio_dir</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[116]">mbed_assert_internal</a><BR>
  <LI><a href="#[127]">gpio_init_in</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[156]">gpio_mode</a><BR>
  <LI><a href="#[14b]">pinmap_pinout</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[158]">pin_mode</a><BR>
- <LI><a href="#[146]">serial_baud</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[117]">mbed_assert_internal</a><BR>
+ <LI><a href="#[146]">serial_baud</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[116]">mbed_assert_internal</a><BR>
  <LI><a href="#[145]">serial_init</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[158]">pin_mode</a><BR>
  <LI><a href="#[172]">pinmap_merge</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[12c]">error</a><BR>
  <LI><a href="#[14a]">pinmap_peripheral</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[12c]">error</a><BR>
- <LI><a href="#[14d]">core_util_critical_section_exit</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[117]">mbed_assert_internal</a><BR>
+ <LI><a href="#[14d]">core_util_critical_section_exit</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[116]">mbed_assert_internal</a><BR>
 </UL>
 <P>
 <H3>
@@ -80,7 +80,7 @@ Function Pointers
  <LI><a href="#[10]">UsageFault_Handler</a> from mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/startup_LPC17xx.o(.text) referenced from mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/startup_LPC17xx.o(RESET)
  <LI><a href="#[15]">WDT_IRQHandler</a> from mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/startup_LPC17xx.o(.text) referenced from mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/startup_LPC17xx.o(RESET)
  <LI><a href="#[47]">analogRead()</a> from .\build\main.o(i._Z10analogReadv) referenced from .\build\main.o(i.main)
- <LI><a href="#[46]">numericRead()</a> from .\build\main.o(i._Z11numericReadv) referenced from .\build\main.o(i.main)
+ <LI><a href="#[46]">NumericP1()</a> from .\build\main.o(i._Z9NumericP1v) referenced from .\build\main.o(i.main)
  <LI><a href="#[67]">mbed::AnalogIn::lock()</a> from .\build\main.o(i._ZN4mbed8AnalogIn4lockEv) referenced from .\build\main.o(.constdata__ZTVN4mbed8AnalogInE)
  <LI><a href="#[68]">mbed::AnalogIn::unlock()</a> from .\build\main.o(i._ZN4mbed8AnalogIn6unlockEv) referenced from .\build\main.o(.constdata__ZTVN4mbed8AnalogInE)
  <LI><a href="#[42]">mbed::AnalogIn::~AnalogIn()</a> from .\build\main.o(i._ZN4mbed8AnalogInD1Ev) referenced from .\build\main.o(.constdata__ZTVN4mbed8AnalogInE)
@@ -750,7 +750,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sti___8_main_cpp_in1
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalIn::DigitalIn(PinName)
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::DigitalOut(PinName)
+<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::DigitalOut(PinName)
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_localtime_r
@@ -1465,12 +1465,12 @@ Global Symbols
 </UL>
 <P><STRONG><a name="[47]"></a>analogRead()</STRONG> (Thumb, 296 bytes, Stack size 24 bytes, .\build\main.o(i._Z10analogReadv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 584 + Unknown Stack Size
-<LI>Call Chain = analogRead() &rArr; rtos::Queue&lang;Event, (unsigned)500&rang;::put(Event*, unsigned) &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
+<LI>Call Chain = analogRead() &rArr; rtos::Queue&lang;Event, (unsigned)50&rang;::put(Event*, unsigned) &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::wait(unsigned)
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Queue&lang;Event, (unsigned)500&rang;::put(Event*, unsigned)
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Queue&lang;Event, (unsigned)50&rang;::put(Event*, unsigned)
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::AnalogIn::read_u16()
 <LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;time
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
@@ -1480,34 +1480,33 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[46]"></a>numericRead()</STRONG> (Thumb, 134 bytes, Stack size 16 bytes, .\build\main.o(i._Z11numericReadv))
-<BR><BR>[Stack]<UL><LI>Max Depth = 576 + Unknown Stack Size
-<LI>Call Chain = numericRead() &rArr; rtos::Queue&lang;Event, (unsigned)500&rang;::put(Event*, unsigned) &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
+<P><STRONG><a name="[46]"></a>NumericP1()</STRONG> (Thumb, 248 bytes, Stack size 32 bytes, .\build\main.o(i._Z9NumericP1v))
+<BR><BR>[Stack]<UL><LI>Max Depth = 592 + Unknown Stack Size
+<LI>Call Chain = NumericP1() &rArr; rtos::Queue&lang;Event, (unsigned)50&rang;::put(Event*, unsigned) &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::wait(unsigned)
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Queue&lang;Event, (unsigned)500&rang;::put(Event*, unsigned)
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Queue&lang;Event, (unsigned)50&rang;::put(Event*, unsigned)
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalIn::operator int()
-<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::operator =(int)
 <LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;time
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[116]"></a>mbed::DigitalOut::write(int)</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, .\build\main.o(i._ZN4mbed10DigitalOut5writeEi))
+<P><STRONG><a name="[115]"></a>mbed::DigitalOut::write(int)</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, .\build\main.o(i._ZN4mbed10DigitalOut5writeEi))
 <BR><BR>[Stack]<UL><LI>Max Depth = 320 + Unknown Stack Size
 <LI>Call Chain = mbed::DigitalOut::write(int) &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
-<BR>[Called By]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::operator =(int)
+<BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::operator =(int)
 </UL>
 
-<P><STRONG><a name="[118]"></a>mbed::DigitalOut::DigitalOut(PinName)</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, .\build\main.o(i._ZN4mbed10DigitalOutC1E7PinName))
+<P><STRONG><a name="[117]"></a>mbed::DigitalOut::DigitalOut(PinName)</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, .\build\main.o(i._ZN4mbed10DigitalOutC1E7PinName))
 <BR><BR>[Stack]<UL><LI>Max Depth = 352 + Unknown Stack Size
 <LI>Call Chain = mbed::DigitalOut::DigitalOut(PinName) &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
+<BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sti___8_main_cpp_in1
@@ -1515,14 +1514,13 @@ Global Symbols
 
 <P><STRONG><a name="[1df]"></a>mbed::DigitalOut::DigitalOut__sub_object(PinName)</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, .\build\main.o(i._ZN4mbed10DigitalOutC1E7PinName), UNUSED)
 
-<P><STRONG><a name="[115]"></a>mbed::DigitalOut::operator =(int)</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, .\build\main.o(i._ZN4mbed10DigitalOutaSEi))
+<P><STRONG><a name="[119]"></a>mbed::DigitalOut::operator =(int)</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, .\build\main.o(i._ZN4mbed10DigitalOutaSEi))
 <BR><BR>[Stack]<UL><LI>Max Depth = 336 + Unknown Stack Size
 <LI>Call Chain = mbed::DigitalOut::operator =(int) &rArr; mbed::DigitalOut::write(int) &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::write(int)
+<BR>[Calls]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::write(int)
 </UL>
 <BR>[Called By]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
-<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;numericRead()
 </UL>
 
 <P><STRONG><a name="[67]"></a>mbed::AnalogIn::lock()</STRONG> (Thumb, 16 bytes, Stack size 16 bytes, .\build\main.o(i._ZN4mbed8AnalogIn4lockEv))
@@ -1582,7 +1580,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 328 + Unknown Stack Size
 <LI>Call Chain = mbed::FileBase::lookup(const char*, unsigned) &rArr; SingletonPtr&lang;PlatformMutex&rang;::operator -&rang;() &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SingletonPtr&lang;PlatformMutex&rang;::operator -&rang;()
@@ -1648,9 +1646,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 312 + Unknown Stack Size
 <LI>Call Chain = mbed::DigitalIn::operator int() &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
-<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;numericRead()
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NumericP1()
 </UL>
 
 <P><STRONG><a name="[10a]"></a>rtos::Mutex::lock(unsigned)</STRONG> (Thumb, 16 bytes, Stack size 16 bytes, .\build\mutex.o(i._ZN4rtos5Mutex4lockEj))
@@ -1662,7 +1660,7 @@ Global Symbols
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::_thunk(const void*)
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::set_priority(osPriority)
-<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;numericRead()
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NumericP1()
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analogRead()
 </UL>
 
@@ -1674,7 +1672,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::set_priority(osPriority)
-<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;numericRead()
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NumericP1()
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analogRead()
 </UL>
 
@@ -1721,8 +1719,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
-<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;numericRead()
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NumericP1()
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analogRead()
 </UL>
 
@@ -1732,7 +1729,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator new[] (unsigned)
 <LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator delete[] (void*)
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadCreate
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
@@ -1747,7 +1744,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 568 + Unknown Stack Size
 <LI>Call Chain = rtos::Thread::_thunk(const void*) &rArr; rtos::Semaphore::release() &rArr; osSemaphoreRelease &rArr; isrSemaphoreRelease &rArr; isr_sem_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 <LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Semaphore::release()
 </UL>
@@ -1914,7 +1911,7 @@ Global Symbols
 <LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FilePath::file()
 <LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FilePath::fileSystem()
 <LI><a href="#[145]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_init
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 <LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0sscanf
 </UL>
@@ -1941,7 +1938,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_pinout
 <LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_peripheral
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::AnalogIn::AnalogIn(PinName)
 </UL>
@@ -1956,19 +1953,19 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 16 + In Cycle
 <LI>Call Chain = core_util_critical_section_enter &rArr;  mbed_assert_internal (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_die
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_error_vfprintf
 <LI><a href="#[165]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_error_printf
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 
 <P><STRONG><a name="[14d]"></a>core_util_critical_section_exit</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/mbed.ar(mbed_critical.o)(i.core_util_critical_section_exit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + In Cycle
 <LI>Call Chain = core_util_critical_section_exit &rArr;  mbed_assert_internal (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_error_vfprintf
 <LI><a href="#[165]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_error_printf
@@ -2007,11 +2004,11 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 16 + In Cycle
 <LI>Call Chain = gpio_dir &rArr;  mbed_assert_internal (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out_ex
 <LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_in
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
+<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
 </UL>
 
 <P><STRONG><a name="[154]"></a>gpio_init</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/gpio_api.o(i.gpio_init))
@@ -2021,7 +2018,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out_ex
 <LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_in
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
+<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
 </UL>
 
 <P><STRONG><a name="[127]"></a>gpio_init_in</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/mbed.ar(mbed_gpio.o)(i.gpio_init_in))
@@ -2036,17 +2033,17 @@ Global Symbols
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalIn::DigitalIn(PinName)
 </UL>
 
-<P><STRONG><a name="[119]"></a>gpio_init_out</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/mbed.ar(mbed_gpio.o)(i.gpio_init_out))
+<P><STRONG><a name="[118]"></a>gpio_init_out</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/mbed.ar(mbed_gpio.o)(i.gpio_init_out))
 <BR><BR>[Stack]<UL><LI>Max Depth = 336 + Unknown Stack Size
 <LI>Call Chain = gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_mode
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_dir
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_die
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::DigitalOut(PinName)
+<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::DigitalOut(PinName)
 </UL>
 
 <P><STRONG><a name="[157]"></a>gpio_init_out_ex</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/mbed.ar(mbed_gpio.o)(i.gpio_init_out_ex))
@@ -2056,7 +2053,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_mode
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_dir
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_set_flow_control
 </UL>
@@ -2069,7 +2066,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out_ex
 <LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_in
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
+<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
 </UL>
 
 <P><STRONG><a name="[159]"></a>isrMessageGet</STRONG> (Thumb, 72 bytes, Stack size 32 bytes, .\build\rt_cmsis.o(i.isrMessageGet))
@@ -2132,7 +2129,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isrSemaphoreRelease
 </UL>
 
-<P><STRONG><a name="[109]"></a>$Super$$main</STRONG> (Thumb, 260 bytes, Stack size 224 bytes, .\build\main.o(i.main))
+<P><STRONG><a name="[109]"></a>$Super$$main</STRONG> (Thumb, 248 bytes, Stack size 224 bytes, .\build\main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 816 + Unknown Stack Size
 <LI>Call Chain = $Super$$main &rArr; osMessageGet &rArr; isrMessageGet &rArr; isr_mbx_receive &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
@@ -2142,17 +2139,16 @@ Global Symbols
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::unlock()
 <LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Mutex::lock(unsigned)
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::start(mbed::Callback&lang;void()&rang;)
-<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::wait(unsigned)
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::set_priority(osPriority)
 <LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::Callback&lang;void()&rang;::~Callback()
 <LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::Callback&lang;void()&rang;::Callback(void(*)())
 <LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Thread::Thread(osPriority, unsigned, unsigned char*)
-<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::operator =(int)
+<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::operator =(int)
 </UL>
 <BR>[Called By]<UL><LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[117]"></a>mbed_assert_internal</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/mbed.ar(mbed_assert.o)(i.mbed_assert_internal))
+<P><STRONG><a name="[116]"></a>mbed_assert_internal</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/mbed.ar(mbed_assert.o)(i.mbed_assert_internal))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304 + Unknown Stack Size
  + In Cycle
 <LI>Call Chain = mbed_assert_internal &rArr;  mbed_die (Cycle)
@@ -2166,7 +2162,7 @@ Global Symbols
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_open
 <LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_die
 <LI><a href="#[145]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_init
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
+<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
 <LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_util_critical_section_exit
 <LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_util_critical_section_enter
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_mode
@@ -2178,7 +2174,7 @@ Global Symbols
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SingletonPtr&lang;PlatformMutex&rang;::operator -&rang;()
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FileBase::lookup(const char*, unsigned)
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalIn::operator int()
-<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::write(int)
+<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::write(int)
 <LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;time
 </UL>
 
@@ -2187,12 +2183,12 @@ Global Symbols
 <LI>Call Chain = mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wait_ms
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
+<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init_out
 <LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_util_critical_section_enter
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 
 <P><STRONG><a name="[165]"></a>mbed_error_printf</STRONG> (Thumb, 74 bytes, Stack size 160 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/mbed_board.o(i.mbed_error_printf))
@@ -2205,7 +2201,7 @@ Global Symbols
 <LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_util_critical_section_enter
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vsprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Called By]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 
 <P><STRONG><a name="[14e]"></a>mbed_error_vfprintf</STRONG> (Thumb, 68 bytes, Stack size 144 bytes, mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/mbed_board.o(i.mbed_error_vfprintf))
@@ -2307,7 +2303,7 @@ Global Symbols
 <LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__get_PRIMASK
 <LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__get_IPSR
 </UL>
-<BR>[Called By]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Queue&lang;Event, (unsigned)500&rang;::put(Event*, unsigned)
+<BR>[Called By]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtos::Queue&lang;Event, (unsigned)50&rang;::put(Event*, unsigned)
 </UL>
 
 <P><STRONG><a name="[12b]"></a>osMutexCreate</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, .\build\rt_cmsis.o(i.osMutexCreate))
@@ -2471,7 +2467,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 16 + In Cycle
 <LI>Call Chain = pin_function &rArr;  mbed_assert_internal (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_pinout
@@ -2481,7 +2477,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 320 + Unknown Stack Size
 <LI>Call Chain = pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[145]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_init
 <LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_mode
@@ -3007,7 +3003,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 40 + In Cycle
 <LI>Call Chain = serial_baud &rArr;  mbed_assert_internal (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_write
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_open
@@ -3024,7 +3020,7 @@ Global Symbols
 <LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_merge
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_pinout
 <LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinmap_peripheral
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_write
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_open
@@ -3248,9 +3244,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 328 + Unknown Stack Size
 <LI>Call Chain = time &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
-<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;numericRead()
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NumericP1()
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analogRead()
 </UL>
 
@@ -3344,7 +3340,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 312 + Unknown Stack Size
 <LI>Call Chain = SingletonPtr&lang;PlatformMutex&rang;::operator -&rang;() &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed_assert_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::FileBase::lookup(const char*, unsigned)
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::AnalogIn::unlock()
@@ -3388,13 +3384,13 @@ Global Symbols
 
 <P><STRONG><a name="[1ea]"></a>mbed::Callback&lang;void()&rang;::~Callback__sub_object()</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, .\build\rtostimer.o(t._ZN4mbed8CallbackIFvvEED1Ev), UNUSED)
 
-<P><STRONG><a name="[112]"></a>rtos::Queue&lang;Event, (unsigned)500&rang;::put(Event*, unsigned)</STRONG> (Thumb, 20 bytes, Stack size 16 bytes, .\build\main.o(t._ZN4rtos5QueueI5EventLj500EE3putEPS1_j))
+<P><STRONG><a name="[112]"></a>rtos::Queue&lang;Event, (unsigned)50&rang;::put(Event*, unsigned)</STRONG> (Thumb, 20 bytes, Stack size 16 bytes, .\build\main.o(t._ZN4rtos5QueueI5EventLj50EE3putEPS1_j))
 <BR><BR>[Stack]<UL><LI>Max Depth = 560 + Unknown Stack Size
-<LI>Call Chain = rtos::Queue&lang;Event, (unsigned)500&rang;::put(Event*, unsigned) &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
+<LI>Call Chain = rtos::Queue&lang;Event, (unsigned)50&rang;::put(Event*, unsigned) &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessagePut
 </UL>
-<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;numericRead()
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NumericP1()
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analogRead()
 </UL>
 
@@ -3586,7 +3582,7 @@ Local Symbols
 <P><STRONG><a name="[6d]"></a>default_idle_hook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, .\build\rtos_idle.o(i.default_idle_hook))
 <BR>[Address Reference Count : 1]<UL><LI> rtos_idle.o(.data)
 </UL>
-<P><STRONG><a name="[6c]"></a>__sti___8_main_cpp_in1</STRONG> (Thumb, 166 bytes, Stack size 8 bytes, .\build\main.o(i.__sti___8_main_cpp_in1))
+<P><STRONG><a name="[6c]"></a>__sti___8_main_cpp_in1</STRONG> (Thumb, 162 bytes, Stack size 8 bytes, .\build\main.o(i.__sti___8_main_cpp_in1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 472 + Unknown Stack Size
 <LI>Call Chain = __sti___8_main_cpp_in1 &rArr; rtos::Mutex::Mutex() &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
@@ -3597,7 +3593,7 @@ Local Symbols
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalIn::DigitalIn(PinName)
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::AnalogIn::AnalogIn(PinName)
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::DigitalOut(PinName)
+<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbed::DigitalOut::DigitalOut(PinName)
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.init_array)
 </UL>

@@ -1,10 +1,10 @@
 #include "mbed.h"
 #include "rtos.h"
 
-DigitalIn in1(p13);
-DigitalIn in2(p14);
-AnalogIn an1(p15);
-AnalogIn an2(p16);
+DigitalIn in1(p21);
+DigitalIn in2(p22);
+AnalogIn an1(p19);
+AnalogIn an2(p20);
 
 DigitalOut led1(LED1);
 DigitalOut led2(LED2);
@@ -18,48 +18,76 @@ typedef struct
   time_t    		timeStamp;
 }Event;
 
-Queue<Event,500> fifo;
+Queue<Event,50> fifo;
 Mutex fifoMutex;
 
-void ping()
+void NumericP1()
 {
 	uint8_t bit0 = 0;
 	uint8_t bit1 = 0;
-	bool keepValue = false;
+	uint8_t lastReading0 = 0;
+	uint8_t lastReading1 = 0;
+	bool newValue = false;
 	while (true) 
 	{
-		int count1 = 0;
-		int count2 = 0;
-		while(count1 < 10 || count2 < 10)
-		{	
-			uint8_t currentReading1 = in1 == 1 ? 1 : 0;
-			uint8_t currentReading2 = in2 == 1 ? 1 : 0;
-			
-			currentReading2 = currentReading2 << 1;
-			if(currentReading1 != bit0)
-			{
-				keepValue = true;
-			}
-			if(currentReading2 != bit1)
-			{
-				keepValue = true;
-			}
-			uint8_t pins = (bit0 | bit1);
-			count1++;
-			count2++;
-			Thread::wait(5);
-		}
-	}
-}
-
-void numericSend()
-{
-	while(1)
-	{
-		//Sending part, must be in 100ms rate
 		fifoMutex.lock();
-		Event numEvent = {pins,0x0000,ms};
-		fifo.put(&numEvent,ms);
+		int count0 = 0;
+		int count1 = 0;
+		uint8_t idx = 0;
+		uint8_t currentReading0 = 0;
+		uint8_t currentReading1 = 0;
+		while(idx < 20)
+		{
+			if(count0 >= 10 && bit0 != currentReading0)
+			{
+				bit0 = currentReading0;
+				newValue = true;
+			}
+			if(count1 >= 10 && bit1 != currentReading1)
+			{
+				bit1 = currentReading1;
+				newValue = true;
+			}
+			currentReading0 = in1 == 1 ? 1 : 0;
+			currentReading1 = in2 == 1 ? 1 : 0;
+			if(currentReading0 == lastReading0)
+			{
+				count0++;
+				idx++;
+				Thread::wait(5);
+				continue;
+			}
+			else 
+			{
+				lastReading0 = currentReading0;
+				count0 = 0;
+				idx++;
+				Thread::wait(5);
+			}
+			
+			if(currentReading1 == lastReading1)
+			{
+				count1++;
+				idx++;
+				Thread::wait(5);
+				continue;
+			}
+			else 
+			{
+				lastReading1 = currentReading1;
+				count1 = 0;
+				idx++;
+				Thread::wait(5);
+			}
+		}
+		if(newValue)
+		{
+			time_t ms = time(NULL);
+			newValue = false;
+			uint8_t bit = bit0 | bit1 << 1;
+			Event event = {bit, 0x0000, ms};
+			fifo.put(&event);
+		}
 		fifoMutex.unlock();
 	}
 }
@@ -108,9 +136,9 @@ int main()
 	osThreadId mainId = osThreadGetId();
 	osThreadSetPriority(mainId, osPriorityHigh);
 	
-	Thread numReadThread;
-	numReadThread.start(numericRead);
-	numReadThread.set_priority(osPriorityAboveNormal);
+	Thread numReadThread1;
+	numReadThread1.start(NumericP1);
+	numReadThread1.set_priority(osPriorityAboveNormal);
 	
 	Thread analogReadThread;
 	analogReadThread.start(analogRead);
@@ -119,25 +147,27 @@ int main()
 	osThreadSetPriority(mainId, osPriorityNormal);
 	while(true)
 	{
-		fifoMutex.lock();
 		int pins[4] = {0,0,0,0};
 		osEvent fifoEvent = fifo.get();
 		if(fifoEvent.status == osEventMessage)
 		{
-				Event* event = (Event*)fifoEvent.value.p;
-				int upPins = event->pins;
-				int step = 1000;
-				while(upPins != 0)
-				{
-						int remainder = upPins%2;
-						upPins /= 2;
-						pins[step%10] = remainder*step;
-						step /= 10;
-				}
+			fifoMutex.lock();
+			Event* event = (Event*)fifoEvent.value.p;
+			int upPins = event->pins;
+			int step = 0x0;
+			while(upPins != 0)
+			{
+					int remainder = upPins%2;
+					upPins /= 2;
+					pins[step] = remainder;
+					step += 1;
+			}
 		}
 		led4 = pins[1];
 		led3 = pins[0];
+		led2 = pins[2];
+		led1 = pins[3];
 		fifoMutex.unlock();
-		Thread::wait(50);
+		//Thread::wait(50);
 	}
 }
