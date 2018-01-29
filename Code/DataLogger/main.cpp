@@ -48,43 +48,33 @@ void NumericP1()
 				bit1 = currentReading1;
 				newValue = true;
 			}
+			
 			currentReading0 = in1 == 1 ? 1 : 0;
 			currentReading1 = in2 == 1 ? 1 : 0;
+			
 			if(currentReading0 == lastReading0)
-			{
 				count0++;
-				idx++;
-				Thread::wait(5);
-				continue;
-			}
 			else 
 			{
 				lastReading0 = currentReading0;
 				count0 = 0;
-				idx++;
-				Thread::wait(5);
 			}
 			
 			if(currentReading1 == lastReading1)
-			{
 				count1++;
-				idx++;
-				Thread::wait(5);
-				continue;
-			}
 			else 
 			{
 				lastReading1 = currentReading1;
 				count1 = 0;
-				idx++;
-				Thread::wait(5);
 			}
+			idx++;
+			Thread::wait(5);
 		}
 		if(newValue)
 		{
 			time_t ms = time(NULL);
 			newValue = false;
-			uint8_t bit = bit0 | bit1 << 1;
+			uint8_t bit = bit0 | (bit1 << 1);
 			Event event = {bit, 0x0000, ms};
 			fifo.put(&event);
 		}

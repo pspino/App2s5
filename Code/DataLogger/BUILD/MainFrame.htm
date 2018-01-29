@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\BUILD\MainFrame.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\BUILD\MainFrame.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Mon Jan 29 15:28:35 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Mon Jan 29 15:59:50 2018
 <BR><P>
 <H3>Maximum Stack Usage =        832 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1480,7 +1480,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[46]"></a>NumericP1()</STRONG> (Thumb, 248 bytes, Stack size 32 bytes, .\build\main.o(i._Z9NumericP1v))
+<P><STRONG><a name="[46]"></a>NumericP1()</STRONG> (Thumb, 222 bytes, Stack size 32 bytes, .\build\main.o(i._Z9NumericP1v))
 <BR><BR>[Stack]<UL><LI>Max Depth = 592 + Unknown Stack Size
 <LI>Call Chain = NumericP1() &rArr; rtos::Queue&lang;Event, (unsigned)50&rang;::put(Event*, unsigned) &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; error &rArr; exit &rArr; mbed_die &rArr; gpio_init_out &rArr; gpio_mode &rArr; pin_mode &rArr; mbed_assert_internal &rArr;  mbed_die (Cycle)
 </UL>
