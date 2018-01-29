@@ -18,31 +18,49 @@ typedef struct
   time_t    		timeStamp;
 }Event;
 
-
-
 Queue<Event,500> fifo;
 Mutex fifoMutex;
 
-
-void numericRead()
+void ping()
 {
+	uint8_t bit0 = 0;
+	uint8_t bit1 = 0;
+	bool keepValue = false;
 	while (true) 
 	{
-		time_t ms = time(NULL);
-		led3 = in1;
-		led4 = in2;
-		unsigned int bit0 = in1 == 1 ? 1 : 0;
-		unsigned int bit1 = in2 == 1 ? 1 : 0;
-		bit1 = bit1 << 1;
-		int pins = (bit0 | bit1);
-		
+		int count1 = 0;
+		int count2 = 0;
+		while(count1 < 10 || count2 < 10)
+		{	
+			uint8_t currentReading1 = in1 == 1 ? 1 : 0;
+			uint8_t currentReading2 = in2 == 1 ? 1 : 0;
+			
+			currentReading2 = currentReading2 << 1;
+			if(currentReading1 != bit0)
+			{
+				keepValue = true;
+			}
+			if(currentReading2 != bit1)
+			{
+				keepValue = true;
+			}
+			uint8_t pins = (bit0 | bit1);
+			count1++;
+			count2++;
+			Thread::wait(5);
+		}
+	}
+}
+
+void numericSend()
+{
+	while(1)
+	{
 		//Sending part, must be in 100ms rate
 		fifoMutex.lock();
 		Event numEvent = {pins,0x0000,ms};
 		fifo.put(&numEvent,ms);
 		fifoMutex.unlock();
-		
-		Thread::wait(100);
 	}
 }
 
