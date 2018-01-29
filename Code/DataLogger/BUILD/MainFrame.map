@@ -1061,8 +1061,8 @@ Section Cross References
     .\build\main.o(i.main) refers to .\build\thread.o(i._ZN4rtos6Thread12set_priorityE10osPriority) for rtos::Thread::set_priority(osPriority)
     .\build\main.o(i.main) refers to .\build\rt_cmsis.o(i.osMessageGet) for osMessageGet
     .\build\main.o(i.main) refers to .\build\mutex.o(i._ZN4rtos5Mutex4lockEj) for rtos::Mutex::lock(unsigned)
-    .\build\main.o(i.main) refers to .\build\main.o(i._ZN4mbed10DigitalOutaSEi) for mbed::DigitalOut::operator =(int)
     .\build\main.o(i.main) refers to .\build\mutex.o(i._ZN4rtos5Mutex6unlockEv) for rtos::Mutex::unlock()
+    .\build\main.o(i.main) refers to .\build\main.o(i._ZN4mbed10DigitalOutaSEi) for mbed::DigitalOut::operator =(int)
     .\build\main.o(i.main) refers to .\build\main.o(i._Z9NumericP1v) for NumericP1()
     .\build\main.o(i.main) refers to .\build\main.o(i._Z10analogReadv) for analogRead()
     .\build\main.o(i.main) refers to .\build\main.o(.bss) for fifo
@@ -4696,7 +4696,7 @@ Image component sizes
        148         30         87          0          0        228   mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/gpio_api.o
        176          8          0          0          0       8975   .\build\hal_cm.o
        304         36          0          0          0        884   .\build\hal_cm3.o
-      1682        334         77         16        396      54242   .\build\main.o
+      1682        334         77         16        396      54234   .\build\main.o
        456         70        108          0          0        260   mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/mbed_board.o
        126         42          0          0          0      11242   .\build\mutex.o
        236         48         85          0          0        160   mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/pinmap.o
@@ -4727,7 +4727,7 @@ Image component sizes
        248         64          0          4          0        356   mbed/TARGET_LPC1768/TOOLCHAIN_ARM_STD/us_ticker.o
 
     ----------------------------------------------------------------------
-     14928       1842       1440        160       4992     200502   Object Totals
+     14928       1842       1440        160       4992     200494   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         30          0         15          4          4          0   (incl. Padding)
 
@@ -4891,8 +4891,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     28740       2672       2100        236       5384     195042   Grand Totals
-     28740       2672       2100        236       5384     195042   ELF Image Totals
+     28740       2672       2100        236       5384     195034   Grand Totals
+     28740       2672       2100        236       5384     195034   ELF Image Totals
      28740       2672       2100        236          0          0   ROM Totals
 
 ==============================================================================

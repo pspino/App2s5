@@ -138,7 +138,7 @@ int main()
 	while(true)
 	{
 		int pins[4] = {0,0,0,0};
-		osEvent fifoEvent = fifo.get();
+		osEvent fifoEvent = fifo.get(5);
 		if(fifoEvent.status == osEventMessage)
 		{
 			fifoMutex.lock();
@@ -152,12 +152,11 @@ int main()
 					pins[step] = remainder;
 					step += 1;
 			}
+			fifoMutex.unlock();
 		}
 		led4 = pins[1];
 		led3 = pins[0];
-		led2 = pins[2];
-		led1 = pins[3];
-		fifoMutex.unlock();
-		//Thread::wait(50);
+		led2 = pins[3];
+		led1 = pins[2];
 	}
 }
