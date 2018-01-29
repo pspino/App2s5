@@ -18,9 +18,10 @@ typedef struct
   time_t    		timeStamp;
 }Event;
 
+
+
 Queue<Event,500> fifo;
 Mutex fifoMutex;
-
 
 
 void numericRead()
@@ -101,28 +102,23 @@ int main()
 	while(true)
 	{
 		fifoMutex.lock();
+		int pins[4] = {0,0,0,0};
 		osEvent fifoEvent = fifo.get();
 		if(fifoEvent.status == osEventMessage)
 		{
-			if(fifoEvent.status == osEventMessage)
-			{
 				Event* event = (Event*)fifoEvent.value.p;
-				printf("%d",event->pins);
-			}
-//			unsigned int* prtValue = (unsigned int*)fifoEvent.value.v;
-//			int bin[2] = {0,0};
-//			int decValue = *prtValue;
-//			int step = 10;
-//			while(decValue !=0)
-//      {
-//					int remainder = decValue%2;
-//					decValue /= 2;
-//					bin[step%10] = remainder*step;
-//					step /= 10;
-//			}
-//			led1 = bin[0];
-//			led2 = bin[1];
+				int upPins = event->pins;
+				int step = 1000;
+				while(upPins != 0)
+				{
+						int remainder = upPins%2;
+						upPins /= 2;
+						pins[step%10] = remainder*step;
+						step /= 10;
+				}
 		}
+		led4 = pins[1];
+		led3 = pins[0];
 		fifoMutex.unlock();
 		Thread::wait(50);
 	}
