@@ -46,6 +46,8 @@ La tâche pour l'acqusition des données numérique vérifie s'il y a un changem
 \subsection{Analogique}
 La tâche pour l'acquisition des données analogique vérifie s'il y a un changement de la moyenne des 5 dernière lecture. La définition d'un changement est lorsque la nouvelle moyenne est $\pm$ 12.5$\%$ de l'ancienne moyenne. La lecture des pattes analogique opère à 50ms et envoi la moyenne recalculer au 250ms. Une boucle itérative sur 5 tours additionne les valeurs lu et attend 50ms. Une fois 5 échantillions additionné ensemble, soit 250ms plus tard, la comparaison est fait. Si une nouvelle valeur est accepté, une acquisition du mutex de la file des Event est appelé et le mutex du temps est acquis. un Event est crée et inséré dans le file. Ensuite les mutex sont relâchés. 
 
+\subsection{L'horloge temps-réel (RTC)}
+
 \section{Synchronisation des tâches CPU.}
 Pour la scynchronisation des ressources et des tâches, des mutexs sont utilisé. Le code opère a l'aide d'une list de type FIFO.
 \section{Conception du montage prototype.}
