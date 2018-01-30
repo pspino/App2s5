@@ -3,6 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{setspace}
 \usepackage{tikz}
+\usepackage{graphicx}
+\graphicspath{ {image/} }
 
 \setlength{\parindent}{0cm}
 
@@ -35,11 +37,11 @@
 Ce présent rapport a pour but de présenter les éléments de conception du système d'acquisition de données(SAD) développé par notre équipe. Le SAD a été conçue à l'aide d'un processeur embarqué LPC1768, soit la coquille de base du SAD. Le contenue de ce rapport explique les ressources mémoire et du processeur utilisées, les algorithmes de gestion des acquisitions, la synchronisation des tâches utilisées, une analyse des problèmes de conception et de déverminage lors du montage du prototype, une description des méthodes concernant la validation des fréquences d'échantillonnages des données et une analyse du prototype le plus optimal. De plus, une discusion sur les temps d'éxecution des codes base pour un inclinomètre. à la demande de la compagnie metrologie numérique.
 
 \section{Utilisation des ressources matérielles.}
-Pour ce présent prototype deux LCP1768 sont utilisés. Un des microcontrôleur est programmé pour emêttre de façon aléatoire des données soit numériquement ou bien analogiquement. Il est nommé DataSpammer. L'autre microcontrôleur utilise l'interface principale du SAD. Le DataSpammer, est réglé avec une fréquence d'opération mobile, c'est-à-dire qu'elle peut etre changé selon l'utilisateur. Pour le montage, nous avons 2 mbed qui sont branchés ensembles et le DataSpammer envoi ses données aléatoires via 2 port GPIO et la fréquence d'opératiopn passe de 10ms a 500ms. Sur le microcontrôleur qui a l'interface primaire, les led 1 et 2 servent a indiquer un changment de voltage sur les pattes analogiquer p19 et p20. Les led 3 et 4 servent a indiquer un événement numérique. Les pattes p21 et p22 sont utiliser.
+Pour ce présent prototype deux LCP1768 sont utilisés. Un des microcontrôleur est programmé pour emêttre de façon aléatoire des données soit numériquement ou bien analogiquement. Il est nommé DataSpammer. L'autre microcontrôleur utilise l'interface principale du SAD. Le DataSpammer, est réglé avec une fréquence d'opération mobile, c'est-à-dire qu'elle peut etre changé selon l'utilisateur. Pour le montage, nous avons 2 mbed qui sont branchés ensembles et le DataSpammer envoi ses données aléatoires via 2 port GPIO et la fréquence d'opératiopn passe de 10ms a 500ms. Sur le microcontrôleur qui a l'interface primaire, les led 1 et 2 servent a indiquer un changment de voltage sur les pattes analogiquer p19 et p20. Les led 3 et 4 servent a indiquer un événement numérique. Les pattes p21 et p22 sont utiliser. Nous utilisons au maximum 976 bytes de Stack.
 \newpage
 L'interface principale utilise 4 tâches pour faire la gestion des acquisitions, une tâche pour chaque type d'entrée, une tâche pour l'horloge temps-réel(RTC) et une tâche pour la gestion de la propagation. Pour propager les données acquisent, une structure, nommée Event, est utilisé. Cette structure contient un byte non signé, un entier de 32bit et une struct temporelle. Pour propager les Event, une file globale, qui contient des Event, de type First In First Out(FIFO) est utilisé. Pour la gestion de l'accès mémoire de cette file, un mutex global est utilisé. La file est utilisé par les deux tâches d'acqusitions numérique et analogique. Par la suite, pour l'acquisition du temps lors d'une capture de données, une file globale FIFO est utilisé pour une demande du temps. un mutex est aussi utilisé pour la gestion de l'accès a cette file. 
 
-\section{Algorithmes de gestion des acquisitions de données.}
+\section{Algorithmes d'acquisitions de données.}
 L'algorithme dévéloppé pour l'aquisition des données est divisé en 4 tâches différents. Numérique, Analogique et le RTC. La tâche pour l'acquisition numérique étant en priorisation haute, l'analogique en priorisation moyenne et le reste, soit la tâche pour le RTC, en priorisation basse.
 
 \subsection{Numérique}
@@ -57,12 +59,16 @@ Pour la synchronisation des ressources et des tâches, des mutexs sont utilisé.
 \section{Déverminage}
 Il est certain que l'utilisation de l'oscilloscope était primordiale pour déverminer cet APP. Une difficulté se présentait donc devant le fait que nous devions toujours travailler dans un local contenant cet outil, car nous voulions valider nos données en entrés et en sortie. De plus, nous avons remarqué qu'il était difficile de savoir ce que contenait les files. Par exemple, nous avions un problème avec un timestamp, car il changeait de valeur entre 2 thread après être passé par une file. Nous ne pouvions voir que l'addresse du du timestamp, et non sa valeur. Pour faciliter les choses, il serait intéressant d'utiliser plus le sytsème d'expression de Keil, qui permet d'analyser le résultat d'une série de variable. 
 
-\section{Méthode de validation des fréquences d'échantillonage.}
+\section{Validation des fréquences d'échantillonage.}
 Les fréquences d'échantillonages étant de 100ms et de 250ms pour le numérique et l'analogique respectivement, les informations trop vite, ce qui pourrait par exemple créer des évènement invalide alors qu'ils sont bien valide. En plus de faire le bon nombre de wait, comme expliquer dans notre algorithme plus haut, nous pouvions vérifier nos échantillions en allumant les leds sur réception d'un échantillion valide. Par contre, cela étant peu précis, nous avons également développer un autre programme qui permettais d'envoyer les données à un rythme précis. Cela, coupler à notre invite de commande, permettais de valider que nous avions bien reçu, par exemple, les 3 échantillions valide envoyés. Ainsi, nous avons pu confirmer le fonctionnement de nos fréquences.
 
-\section{Analyse de performances des Codes de Métrologie Numérique.}
-
+\section{Performances des algorithme métrologie.}
+En ordre du plus rapide au moins rapide, nous avons le calcul 4 ensuite le 1, le 3, et finalement le 2. L'algorithme  est le plus rapide car il utilise acos$\_$table, qui fonctionne comme une table de correspondance. Les données du calcul acos sont déjà faite, donc on peut simplement aller chercher les valeurs au lieu de les calculer chaque fois. Ensuite, l'algorithme 1 est plus rapide que le 2 et 3, car en déclarant sa variable module en float, il gagne en vitesse face a à déclaration de la constante 1024.0, qui est vu comme un double. Si la constante avait été déclaré comme un float (1024.0f), la vitesse de l'algorithme 1 et 2 serait identique. Finalement, le 3 est plus rapide que le 2 car même s'il fait un calcul mathématique de plus, il fonctionne en float au lieu d'en double. Mais en faisant justement 2 calculs mathématique, l'algorithme 3 est plus lent que le 1, qui ne fait lui q'un seul calcul
 \section{Conclusion.}
+Au cours de cette expérience magnifique de développement, nous avons pu peaufiner nos connaissances en gestion de Thread, par exemple grâce au Mutex et principes de priorité. Également, nous avons dû faire l'analyse des performances de différents algoritme, ce qui nous fait comprende les subtilités des vitesses d'éxécutions. 
 \section{Schémas.}
+\subsection{Schéma bloc.}
+\includegraphics{bloc}
+\subsection{Diagramme de séquence}
+\includegraphics[scale =0.5]{sequence.png}
 \end{document}
-
