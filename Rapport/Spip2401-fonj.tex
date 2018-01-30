@@ -49,12 +49,19 @@ La tâche pour l'acqusition des données numérique vérifie s'il y a un changem
 La tâche pour l'acquisition des données analogique vérifie s'il y a un changement de la moyenne des 5 dernière lecture. La définition d'un changement est lorsque la nouvelle moyenne est $\pm$ 12.5$\%$ de l'ancienne moyenne. La lecture des pattes analogique opère à 50ms et envoi la moyenne recalculer au 250ms. Une boucle itérative sur 5 tours additionne les valeurs lu et attend 50ms. Une fois 5 échantillions additionné ensemble, soit 250ms plus tard, la comparaison est fait. Si une nouvelle valeur est accepté, une acquisition du mutex de la file des Event est appelé et le mutex du temps est acquis. un Event est crée et inséré dans le file. Ensuite les mutex sont relâchés. 
 
 \subsection{L'horloge temps-réel (RTC)}
+La tâche pour l'acquision de l'étampe de temps s'exécute a une fréquence d'opération de 50ms. Elle demande l'accès à la file du temps en tentent d'acquérir le mutex de la file du temps. Ensuite, elle crée un variable time$\_$t et l'insère dans le file de temps. L'algorithme relâche ensuite le mutex de la file de temps.
 
 \section{Synchronisation des tâches CPU.}
-Pour la scynchronisation des ressources et des tâches, des mutexs sont utilisé. Le code opère a l'aide d'une list de type FIFO.
-\section{Conception du montage prototype.}
+Pour la synchronisation des ressources et des tâches, des mutexs sont utilisé. Les tâches ont un ordre de priorité allans de haute à basse. Pour s'assurer que les tâches seront bien synchrone au départ cest de fixer le processus crée par la fonction main à une haute priorité, partir les tâches avec leur priorité respective et ensuite remettre le processus de la fonction main à une priorité normale. Cela permet de bien s'assurer que les opération critiques, tel que le démarage des tâches soit bien exécuté dans la fonction main. Ensuite, dans les tâches, l'utilisation de la fonction Thread::wait(ms). Cela nous permet de fixer la fréquence d'opération au valeur que l'on veut obtenir. elle permet aussi de réguler l'accès aux mutex 
+
+\section{Déverminage}
+Il est certain que l'utilisation de l'oscilloscope était primordiale pour déverminer cet APP. Une difficulté se présentait donc devant le fait que nous devions toujours travailler dans un local contenant cet outil, car nous voulions valider nos données en entrés et en sortie. De plus, nous avons remarqué qu'il était difficile de savoir ce que contenait les files. Par exemple, nous avions un problème avec un timestamp, car il changeait de valeur entre 2 thread après être passé par une file. Nous ne pouvions voir que l'addresse du du timestamp, et non sa valeur. Pour faciliter les choses, il serait intéressant d'utiliser plus le sytsème d'expression de Keil, qui permet d'analyser le résultat d'une série de variable. 
+
 \section{Méthode de validation des fréquences d'échantillonage.}
-\section{Optimisation du prototype.}
+Les fréquences d'échantillonages étant de 100ms et de 250ms pour le numérique et l'analogique respectivement, les informations trop vite, ce qui pourrait par exemple créer des évènement invalide alors qu'ils sont bien valide. En plus de faire le bon nombre de wait, comme expliquer dans notre algorithme plus haut, nous pouvions vérifier nos échantillions en allumant les leds sur réception d'un échantillion valide. Par contre, cela étant peu précis, nous avons également développer un autre programme qui permettais d'envoyer les données à un rythme précis. Cela, coupler à notre invite de commande, permettais de valider que nous avions bien reçu, par exemple, les 3 échantillions valide envoyés. Ainsi, nous avons pu confirmer le fonctionnement de nos fréquences.
+
 \section{Analyse de performances des Codes de Métrologie Numérique.}
+
 \section{Conclusion.}
+\section{Schémas.}
 \end{document}
