@@ -2,6 +2,7 @@
 \usepackage{array}
 \usepackage[utf8]{inputenc}
 \usepackage{setspace}
+\usepackage{tikz}
 
 \setlength{\parindent}{0cm}
 
@@ -12,7 +13,7 @@
 	 \LARGE Philippe Spino \par}
 	\vspace{1cm}
 	\small Spip2401\par
-	\small Fonj\par 
+	\small Fonj1903\par 
 	\vspace{3cm}
 	{\Large Rapport App2\par}
 	\vspace{5cm}
@@ -40,9 +41,10 @@ L'interface principale utilise 4 tâches pour faire la gestion des acquisitions,
 L'algorithme dévéloppé pour l'aquisition des données est divisé en 4 tâches différents. Numérique, Analogique et le RTC. La tâche pour l'acquisition numérique étant en priorisation haute, l'analogique en priorisation moyenne et le reste, soit la tâche pour le RTC, en priorisation basse.
 
 \subsection{Numérique}
-La tâche pour l'acqusition des données numérique vérifie s'il y a un changement de bit sur le front montant des changements des bits. Le temps pris pour qu'un bit puisse changer est de l'ordre des 50 ms. La fréquence d'opération de cette algorithmes est 100ms. Pour ce faire, une tâche::wait est utilisé. cela permet d'être assuré que le tâche vas être à une fréquence de 100ms. Une boucle itérative sur 20 tours regarde les valeurs des pattes d'entrées digitales à toutes les 5ms, lorsque les valeurs rester inchangé après une itération, un conteur est incrémenté. Si dès que le conteur atteind 10(10 * 5ms = 50ms) un Event est crée avec l'acquisition et on l'insère dans la file des Event. Avant cela, l'algorithme a fait une demande du mutex pour assurer le bon fonctionnement et évité les interlockage.
+La tâche pour l'acqusition des données numérique vérifie s'il y a un changement de bit. Le temps pris pour qu'un bit puisse changer et être considéré un changement est de l'ordre des 50 ms. La fréquence d'opération de cet algorithme est 100ms. Pour ce faire, une tâche::wait est utilisé. cela permet d'être assuré que le tâche vas être à une fréquence de 100ms. Une boucle itérative sur 20 tours regarde les valeurs des pattes d'entrées digitales à toutes les 5ms, lorsque les valeurs rester inchangé après une itération, un conteur est incrémenté. Si dès que le conteur atteind 10(10 * 5ms = 50ms),l'algorithme a fait une demande au mutex pour assurer l'accès a la file et évité les interlockage. Ensuite, une réquisition du temps est fait à la tâche du RTC. Le mutex du temps est acquis et un Event est crée avec le changement et le temps, et on l'ajoute à la file des Event. Une fois, l'Event dans la file, les mutex sont libérés.
 
 \subsection{Analogique}
+La tâche pour l'acquisition des données analogique vérifie s'il y a un changement de la moyenne des 5 dernière lecture. La définition d'un changement est lorsque la nouvelle moyenne est $\pm$ 12.5$\%$ de l'ancienne moyenne. La lecture des pattes analogique opère à 50ms et envoi la moyenne recalculer au 250ms. Une boucle itérative sur 5 tours additionne les valeurs lu et attend 50ms. Une fois 5 échantillions additionné ensemble, soit 250ms plus tard, la comparaison est fait. Si une nouvelle valeur est accepté, une acquisition du mutex de la file des Event est appelé et le mutex du temps est acquis. un Event est crée et inséré dans le file. Ensuite les mutex sont relâchés. 
 
 \section{Synchronisation des tâches CPU.}
 Pour la scynchronisation des ressources et des tâches, des mutexs sont utilisé. Le code opère a l'aide d'une list de type FIFO.
