@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{array}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+	\section{Laboratoire}
+	Retour sur les different wait possibles $(osThread, Thread$::$wait, wait_ms)$. Le premier numero 1 est un deadlock. Le numero 2 sur les mutex et la deifferences des delais. Refaire le Laboratoire
+	\section{RTOS}
+	La difference en hard real-time et soft real-time est que:
+	\begin{itemize}
+	\item Le hard real-time doit absolument atteindre les bon deadlines au bon moment dans le temps. On parle d'evenement critique. Ex: Un pace-maker.
+	\item Le soft n'est pas super constrain dans le temps. On parle d'evenment non-critique. un live stream qui perd un packet.
+	\end{itemize}
+	Nous allons analyser deux type de OS, soit	RTOS(Real-Time OS) et GPOS(System general d'exploitation). Un GPOS est comme Windows ou Linux. tandis qu'un RTOS est simple et n'installe pas aucun driver qui ne sont pas utiliser. RTOS est plus performant, mais il ne fait qu'une seule chose a la fois. Le RTOS est habituellement designer pour s'executer de la ROM/RAM directment sans utiliser de stockage externe. De plus, le RTOS est plus facile de changer de platforme. Le GPOS est nettement plus gros que les RTOS. Ils sont assez gros pour ne pas etre possible de les mettres sur les mbed.
+\newline
+\par
+\noindent	
+La fiabilite des RTOS on une unite de mesure precise. On parle des 9. si on parle de 99.9\%, on considere que sur 1 ans, on ne pourras pas utiliser la machine durant 9h. On y retrouve les Desktop dans cette categorie. Quand on parle de 99.99\% on parle de 1h. On l'y retrouve les Serveurs ou les entreprises. Quand on parle de 99.999\% on parle de 5 min. On l'y retrouve encore des serveur mais de type de carriere class. Quand on parle de 9.9999\%, on parle de 31 seconde par annee. On l'y retrouve les carriers switchs. Cette categorie est extremement rare. 
+\newline
+\par
+\noindent
+Un autre point sur les RTOS, on considere leur predictibilite. On parle de connaitres leur etat dans plusieurs annee. On doit connaitre leur performance au fils des annees. 
+RTOS est souvent modifier au fil des annees. On demarre le RTOS apres le boot loader, comme montre dans le diagramme ci dessus.
+\newline 
+\begin{center}
+\begin{tabular}{|c|}
+\hline
+Reset Vector \\ \hline
+BootLoader \\ \hline
+HW \\ \hline
+RTOS Init\\ \hline
+RTOS composant \\ \hline
+RTOS Start\\ \hline
+Program\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Multi-Tache}
+On parle de trois etat possible d'une tache, READY, RUNNING et BLOCKED. Ready est quand la tache est pret a etre executer. Running est quand elle est exercuter. Blocked est quand elle est blocker. La prioriasation des taches permet la transision entre Ready et Running pour certaines taches.Cela peut arriver qu'une tache soit redui de priorite et retourne en mode READY. Voir Schema ci-dessus. (A TROUVER DANS LE LIVRE).
+\newline
+\par
+\noindent
+Dans RTOS, on a plusieurs methode de priorisation des taches, Soit round-robin,
+Par priorisation vonlontaire (preemtive scheduling) (haute,moyenne, basse) ou le mix des deux. RTOS est capable d'interompt les taches quand il veut, ou qu'il le veut.
+\section{Gestion Memoire}
+\begin{center}
+	Mem Array of Heap figure.
+\end{center}
+Les taches partages :
+\begin{itemize}
+\item HEAP
+\item Flash - $\>$ Var globals.
+\end{itemize}
+Les taches ne partages pas :
+\begin{itemize}
+\item Stack.
+\end{itemize}
+\section{Utilisation Typique Semaphore}
+Une des utilisation du semaphore est la gestion des ressources. On peut aussi synchronise les taches. ** faire attention car on peut ajouter autant de token que l'on veut. **
+On peut faire de la synchronisation par gestion des credits.  
+\section{Utilisation Typique Message}
+On utilise la methode des messages avec 3 boites. VIDE, PAS VIDE, PLEINE. soit en FIFO, FILO, file bidirectionnel, en broadcasting.
+\section{Analyse des Performances}
+voir le code pour le benchmark.
+\end{document}
